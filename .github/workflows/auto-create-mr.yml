@@ -25,3 +25,27 @@ jobs:
                 --body "Auto create pull request to get ready for merging sources to develop"
         env:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add metadata to PR
+        run: |
+          PR_NUMBER=$(gh pr list \
+            --head "${GITHUB_REF_NAME}" \
+            --json number \
+            -q '.[0].number')
+      
+          echo "PR_NUMBER=$PR_NUMBER"
+      
+          # Assign the person who pushed their sources
+          gh pr edit "$PR_NUMBER" --add-assignee "${{ github.actor }}"
+      
+          # Set reviewer
+          gh pr edit "$PR_NUMBER" --add-reviewer TDMinhNhat
+      
+          # Assign the label of the pull request
+          if [[ "${GITHUB_REF_NAME}" == feature/* ]]; then
+            gh pr edit "$PR_NUMBER" --add-label request-merge-feature
+          elif [[ "${GITHUB_REF_NAME}" == fix/* ]]; then
+            gh pr edit "$PR_NUMBER" --add-label request-merge-fix
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
