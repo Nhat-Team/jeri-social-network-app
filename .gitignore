@@ -1,0 +1,42 @@
+# Intellij IDEA
+.idea/
+out/
+/httpRequests/
+/queries/
+/dataSources/
+/shelf/
+/workspace.xml
+/dataSources.local.xml
+*.iml
+
+# Gradle
+.gradle/
+build/
+
+# Visual Studio Code / Cursor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# NodeJS (ReactJS)
+node_modules/
+dist/
+.env
+npm-debug.log
+yarn-debug.log
+pnpm-debug.log*
+lerna-debug.log*
+yarn-error.log
+package-lock.json
+yarn.lock
+logs
+*.log
+dist
+dist-ssr
+*.local
