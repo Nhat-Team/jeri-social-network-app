@@ -3,8 +3,6 @@ name: "Auto Create Merge Request"
 on:
   push:
     branches:
-      - backend/**
-      - frontend/**
       - feature/**
       - fix/**
 
