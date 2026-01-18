@@ -1,0 +1,27 @@
+name: "Auto Create Merge Request"
+
+on:
+  push:
+    branches:
+      - backend/**
+      - frontend/**
+
+jobs:
+  create_merge_request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6.0.2
+
+      - name: Create Merge Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: develop
+          title: "[Auto Create MR] - Merge source from ${{ github.ref }} to develop - [DD-MM-YYYY]"
+          body: |
+            ## 📌 Auto-generated Pull Request
+
+            - Source branch: `${{ github.ref_name }}`
+            - Target branch: `develop`
