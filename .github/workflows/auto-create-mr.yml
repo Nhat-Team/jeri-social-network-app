@@ -5,6 +5,8 @@ on:
     branches:
       - backend/**
       - frontend/**
+      - feature/**
+      - fix/**
 
 jobs:
   create_merge_request:
