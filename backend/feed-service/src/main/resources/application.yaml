@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: feed-service
+  mongodb:
+    username: ${MONGODB_USERNAME:feed_user}
+    password: ${MONGODB_PASSWORD:feed_password}
+    host: ${MONGODB_HOST:localhost}
+    port: ${MONGODB_PORT:27017}
+    database: ${MONGODB_DATABASE:feed_db}
+server:
+  port: ${SERVER_PORT:11003}
+  servlet:
+    context-path: /feed
