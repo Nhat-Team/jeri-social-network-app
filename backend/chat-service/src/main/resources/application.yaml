@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: chat-service
+  cassandra:
+    password: ${CASSANDRA_PASSWORD:password}
+    username: ${CASSANDRA_USERNAME:cassandra}
+    contact-points: ${CASSANDRA_HOST:127.0.0.1}:${CASSANDRA_PORT:9042}
+server:
+  port: ${SERVER_PORT:11002}
+  servlet:
+    context-path: /chat
