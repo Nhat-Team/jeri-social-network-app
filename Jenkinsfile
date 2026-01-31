@@ -11,40 +11,23 @@ pipeline {
 		}
 
 		stage('Detect Changed Services') {
-
-			when {
-				branch 'develop'
-			}
-
 			steps {
-				sh '''
-					chmod +x gradlew
-					./gradlew clean bootJar -x test
-				'''
+				def servies = ["user-service"]
+
+				for (svc in services) {
+					dir("backend/${svc}") {
+						bat '''
+							gradlew.bat clean bootJar -x test
+						'''
+					}
+				}
 			}
 		}
 
 		stage('Build All Docker Images') {
-
-			when {
-				branch 'develop'
-			}
-
 			steps {
 				sh '''
 					docker-compose up -d --build
-				'''
-			}
-		}
-
-		stage('Docker Cleanup') {
-			when {
-				branch 'main'
-			}
-
-			steps {
-				sh '''
-					docker system prune -af
 				'''
 			}
 		}
