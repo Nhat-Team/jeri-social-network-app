@@ -1,4 +1,12 @@
-## HOW TO USE COMMON LIBRARY IN THIS PROJECT
+<div style="text-align: center; font-weight: bold; font-size: 30px;"> 
+         TUTORIAL TO WORK WITH THIS REPOSITORY
+</div>
+
+</br></br>
+
+<div style="text-align: center; font-weight: bold; font-size: 25px;">
+    HOW TO USE COMMON LIBRARY IN THIS PROJECT
+</div>
 
 ### 1. Clone this backend project from repository
 
@@ -10,7 +18,7 @@ git clone -b develop [URL Repository] [Folder name]
 
 ### 2. Open IDE and direct to the project folder
 
-Open your favorite IDE (in this case, we use Intellij IDEA to tutorialize), and point to the project with the name folder is "backend"
+Open your favorite IDE (in this case, we use IntelliJ IDEA to tutorialize), and point to the project with the name folder is "backend"
 
 Example: Your folder structure is like below
 
@@ -32,7 +40,7 @@ You should open the "backend" folder in your IDE. So the path is like below
 [Root Project]/backend/
 ```
 
-### 3. Allowing Intellij IDEA (any editions) to import all Gradle projects
+### 3. Allowing IntelliJ IDEA (any editions) to import all Gradle projects
 
 ### 4. Publish "library-common-core" to local Maven repository
 
@@ -55,3 +63,23 @@ To run this task, you can follow these steps:
 11. Remember to update the version number in your dependency declaration if you make changes to the `library-common-core` module and republish it.
 
 After completing these steps, you should re-run the Gradle sync in your IDE to ensure other services can recognize the newly published this library.
+
+<div style="text-align: center; font-weight: bold; font-size: 25px;">
+    TUTORIAL WITH WORK STYLE IN THIS REPOSITORY
+</div>
+
+### 1. Clone Project
+
+You should clone the repository into your local to work. Especially, the develop branch which is used to work. 
+
+### 2. Branch
+
+
+
+### 3. Push Source
+
+
+
+### 4. Pull Request
+
+

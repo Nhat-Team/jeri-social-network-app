@@ -26,6 +26,11 @@ repositories {
     mavenLocal()
 }
 
+bootBuildImage {
+    builder = "paketobuildpacks/builder-jammy-buildpackless-tiny"
+    buildpacks = ["paketobuildpacks/oracle", "paketobuildpacks/java-native-image"]
+}
+
 dependencies {
     implementation 'io.github.nhatteam.project:library-common-core:1.0'
 
