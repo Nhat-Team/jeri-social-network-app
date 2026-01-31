@@ -25,6 +25,11 @@ pipleline {
 		}
 
 		stage('Build All Docker Images') {
+
+			when {
+				branch 'develop'
+			}
+
 			steps {
 				sh '''
 					docker-compose up -d --build
