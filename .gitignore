@@ -40,3 +40,6 @@ logs
 dist
 dist-ssr
 *.local
+
+# Others
+storage/

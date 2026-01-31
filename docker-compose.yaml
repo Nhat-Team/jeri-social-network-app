@@ -1,0 +1,87 @@
+name: jeri-app-chat
+services:
+    keycloak:
+        image: keycloak/keycloak:26.5
+        container_name: keycloak
+        environment:
+            KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:-admin}
+            KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:-admin}
+        ports:
+            - 8081:8080
+        command:
+            - start-dev
+        networks:
+            - jeri-app-chat-network
+
+    elasticsearch:
+        image: elasticsearch:9.2.4
+        container_name: elasticsearch
+        environment:
+            - discovery.type=single-node
+        ports:
+            - 9200:9200
+            - 9300:9300
+        networks:
+            - jeri-app-chat-network
+
+    minio:
+        image: minio/minio:latest
+        container_name: minio
+        environment:
+            MINIO_ROOT_USER: ${MINIO_ROOT_USER:-admin}
+            MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-123456789}
+            MINIO_DEFAULT_BUCKETS: ${MINIO_DEFAULT_BUCKETS:-admin}
+        command: [ "server", "--console-address", ":9001", "/data" ]
+        ports:
+            - 9000:9000
+            - 9001:9001
+        networks:
+            - jeri-app-chat-network
+        volumes:
+            - ./storage/minio-volume:/data
+    
+    postgres:
+        image: postgres:15.1
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER:-postgres}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123456789}
+            POSTGRES_DB: ${POSTGRES_DB:-jeri_user_service}
+        ports:
+            - 5432:5432
+        networks:
+            - jeri-app-chat-network
+
+    user-service:
+        container_name: user-service
+        build:
+            context: ./backend/user-service
+            dockerfile: Dockerfile
+        ports:
+            - 11001:11001
+        environment:
+            - DB_HOST: postgres
+            - DB_PORT: 5432
+            - DB_NAME: jeri_user_service
+            - DB_USER: postgres
+            - DB_PASSWORD: 123456789
+            - SERVER_PORT: 11001
+        restart: always
+        networks:
+            - jeri-app-chat-network
+        depends_on:
+            - postgres
+            - minio
+            - keycloak
+    
+    frontend:
+        build:
+            context: ./frontend/website
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        depends_on:
+            - user-service
+        
+networks:
+    jeri-app-chat-network:
+        driver: bridge

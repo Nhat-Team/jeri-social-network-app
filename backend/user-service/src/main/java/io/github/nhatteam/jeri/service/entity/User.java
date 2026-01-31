@@ -40,4 +40,7 @@ public class User extends BaseEntity {
 
     @Column(name = "avatar", length = 100)
     String avatar;
+
+    @OneToOne(mappedBy = "user")
+    Address address;
 }

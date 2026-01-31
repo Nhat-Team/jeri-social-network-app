@@ -4,14 +4,14 @@ spring:
   flyway:
     enabled: true
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:userdb}
-    user: ${DB_USER:user}
-    password: ${DB_PASSWORD:password}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:jeri_user_serivce}
+    user: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:123456789}
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:userdb}
-    username: ${DB_USER:user}
-    password: ${DB_PASSWORD:password}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:jeri_user_serivce}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:123456789}
   jpa:
     hibernate:
       ddl-auto: none

@@ -13,7 +13,8 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode(callSuper = true)
 public class Address extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "id") @JoinColumn(name = "user_id", nullable = false) @NonNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false) @NonNull
     User user;
 
     @Column(name = "street", length = 50)
