@@ -15,19 +15,21 @@ pipeline {
 				script {
 					def services = ['library-common-core', 'user-service', 'gateway-service']
 
-					for(service in serivces) {
-						if(service == 'library-common-core') {
-							sh '''
-								cd backend/${service}
-								./gradlew build -x test
-								./gradlew publishToMavenLocal
-							'''
-						} else {
-							sh '''
-								cd backend/${service}
-								./gradlew build -x test
-								./gradlew bootJar
-							'''
+					services.each {
+						service -> {
+							dir("backend/${service}") {
+								if(service == 'library-common-core') {
+									sh '''
+										./gradlew build -x test
+										./gradlew publishToMavenLocal
+									'''
+								} else {
+									sh '''
+										./gradlew build -x test
+										./gradlew bootJar
+									'''
+								}
+							}
 						}
 					}
 				}

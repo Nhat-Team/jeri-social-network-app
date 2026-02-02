@@ -32,7 +32,7 @@ bootBuildImage {
 }
 
 dependencies {
-    implementation 'io.github.nhatteam.project:library-common-core:1.0'
+    implementation files('library/library-common-core-1.0.jar')
 
     implementation 'org.mapstruct:mapstruct:1.6.3'
     implementation 'org.mapstruct:mapstruct-processor:1.6.3'
