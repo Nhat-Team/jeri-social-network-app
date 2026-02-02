@@ -12,7 +12,7 @@ import java.time.Instant;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class BaseVo {
+public abstract class BaseVo {
 
     Long id;
 

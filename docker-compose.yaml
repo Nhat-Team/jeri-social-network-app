@@ -4,8 +4,8 @@ services:
         image: keycloak/keycloak:26.5
         container_name: keycloak
         environment:
-            KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME:-admin}
-            KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD:-admin}
+            KC_BOOTSTRAP_ADMIN_USERNAME: admin
+            KC_BOOTSTRAP_ADMIN_PASSWORD: admin
         ports:
             - 8081:8080
         command:
@@ -28,9 +28,9 @@ services:
         image: minio/minio:latest
         container_name: minio
         environment:
-            MINIO_ROOT_USER: ${MINIO_ROOT_USER:-admin}
-            MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-123456789}
-            MINIO_DEFAULT_BUCKETS: ${MINIO_DEFAULT_BUCKETS:-admin}
+            MINIO_ROOT_USER: admin
+            MINIO_ROOT_PASSWORD: 123456789
+            MINIO_DEFAULT_BUCKETS: admin
         command: [ "server", "--console-address", ":9001", "/data" ]
         ports:
             - 9000:9000
@@ -43,8 +43,8 @@ services:
     postgres:
         image: postgres:15.1
         environment:
-            POSTGRES_USER: ${POSTGRES_USER:-postgres}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-123456789}
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 123456789
             POSTGRES_DB: ${POSTGRES_DB:-jeri_user_service}
         ports:
             - 5432:5432
@@ -59,13 +59,12 @@ services:
         ports:
             - 11001:11001
         environment:
-            - DB_HOST: postgres
-            - DB_PORT: 5432
-            - DB_NAME: jeri_user_service
-            - DB_USER: postgres
-            - DB_PASSWORD: 123456789
-            - SERVER_PORT: 11001
-        restart: always
+            DB_HOST: postgres
+            DB_PORT: 5432
+            DB_NAME: jeri_user_service
+            DB_USER: postgres
+            DB_PASSWORD: 123456789
+            SERVER_PORT: 11001
         networks:
             - jeri-app-chat-network
         depends_on:
@@ -73,14 +72,14 @@ services:
             - minio
             - keycloak
     
-    frontend:
-        build:
-            context: ./frontend/website
-            dockerfile: Dockerfile
-        ports:
-            - "80:80"
-        depends_on:
-            - user-service
+    # frontend:
+    #     build:
+    #         context: ./frontend/website
+    #         dockerfile: Dockerfile
+    #     ports:
+    #         - "80:80"
+    #     depends_on:
+    #         - user-service
         
 networks:
     jeri-app-chat-network:
