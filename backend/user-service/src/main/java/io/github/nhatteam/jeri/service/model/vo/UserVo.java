@@ -30,13 +30,5 @@ public class UserVo extends BaseVo {
 
     String username;
 
-    Instant createdAt;
-
-    Instant lastModifiedAt;
-
-    String createdBy;
-
-    String lastModifiedBy;
-
     Boolean deleted;
 }

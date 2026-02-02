@@ -10,15 +10,25 @@ pipeline {
 			}
 		}
 
-		stage('Detect Changed Services') {
+		stage('Build Backend Services') {
 			steps {
-				def servies = ["user-service"]
+				script {
+					def services = ['library-common-core', 'user-service', 'gateway-service']
 
-				for (svc in services) {
-					dir("backend/${svc}") {
-						bat '''
-							gradlew.bat clean bootJar -x test
-						'''
+					for(service in serivces) {
+						if(service == 'library-common-core') {
+							sh '''
+								cd backend/${service}
+								./gradlew build -x test
+								./gradlew publishToMavenLocal
+							'''
+						} else {
+							sh '''
+								cd backend/${service}
+								./gradlew build -x test
+								./gradlew bootJar
+							'''
+						}
 					}
 				}
 			}
