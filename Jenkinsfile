@@ -13,25 +13,17 @@ pipeline {
 		stage('Build Backend Services') {
 			steps {
 				script {
-					def services = ['library-common-core', 'user-service', 'gateway-service']
+					def services = ['user-service', 'gateway-service']
 
-					services.each {
-						service -> {
+					services.each { service ->
 							dir("backend/${service}") {
-								if(service == 'library-common-core') {
 									sh '''
-										./gradlew build -x test
-										./gradlew publishToMavenLocal
+										echo --------- Install Service --------- 
+										./gradlew.bat build -x test
+										./gradlew.bat bootJar
 									'''
-								} else {
-									sh '''
-										./gradlew build -x test
-										./gradlew bootJar
-									'''
-								}
-							}
-						}
-					}
+						}	
+					}	
 				}
 			}
 		}

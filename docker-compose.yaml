@@ -51,6 +51,17 @@ services:
         networks:
             - jeri-app-chat-network
 
+    gateway-service:
+        container_name: gateway-service
+        build:
+            context: ./backend/gateway-service
+            dockerfile: Dockerfile
+        ports:
+            - 11000:11000
+        restart: always
+        networks:
+            - jeri-app-chat-network
+
     user-service:
         container_name: user-service
         build:
@@ -71,6 +82,7 @@ services:
             - postgres
             - minio
             - keycloak
+            - gateway-service
     
     # frontend:
     #     build:
