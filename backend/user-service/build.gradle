@@ -9,12 +9,6 @@ group = 'io.github.nhatteam.project'
 version = '1.0'
 description = 'user-service'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
