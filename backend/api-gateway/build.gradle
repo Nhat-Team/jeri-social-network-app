@@ -9,12 +9,6 @@ group = 'io.github.nhatteam.project'
 version = '1.0'
 description = 'api-gateway'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
-    }
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
