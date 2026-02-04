@@ -1,7 +1,8 @@
 pipeline {
 	
 	agent any
-	
+
+
 	stages {
 		
 		stage('Checkout Code') {
@@ -17,10 +18,10 @@ pipeline {
 
 					services.each { service ->
 							dir("backend/${service}") {
-									sh '''
-										echo --------- Install Service --------- 
-										./gradlew.bat build -x test
-										./gradlew.bat bootJar
+									bat '''
+										call echo --------- Install Service --------- 
+										call gradlew.bat build -x test
+										call gradlew.bat bootJar
 									'''
 						}	
 					}	
@@ -30,7 +31,7 @@ pipeline {
 
 		stage('Build All Docker Images') {
 			steps {
-				sh '''
+				bat '''
 					docker-compose up -d --build
 				'''
 			}
