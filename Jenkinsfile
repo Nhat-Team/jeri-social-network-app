@@ -14,7 +14,7 @@ pipeline {
 		stage('Build Backend Services') {
 			steps {
 				script {
-					def services = ['user-service', 'aoi-gateway']
+					def services = ['user-service', 'gateway-service']
 
 					services.each { service ->
 							dir("backend/${service}") {
