@@ -58,6 +58,8 @@ services:
             dockerfile: Dockerfile
         ports:
             - 11000:11000
+        envrionment:
+            - SERVER_PORT: 11000
         restart: always
         networks:
             - jeri-app-chat-network
