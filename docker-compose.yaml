@@ -51,10 +51,10 @@ services:
         networks:
             - jeri-app-chat-network
 
-    gateway-service:
-        container_name: gateway-service
+    api-gateway:
+        container_name: api-gateway
         build:
-            context: ./backend/gateway-service
+            context: ./backend/api-gateway
             dockerfile: Dockerfile
         ports:
             - 11000:11000
