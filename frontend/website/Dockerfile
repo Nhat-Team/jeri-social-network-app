@@ -1,12 +1,13 @@
 # -------- Stage 1: Build --------
-    FROM node:20-alpine AS build
+    FROM node:25-alpine3.22 AS build
 
     WORKDIR /app
     
-    # Only copy dependency files first (cache friendly)
+    # Copying depdencies files
     COPY package*.json ./
     
-    RUN npm ci
+    # Installing libraries
+    RUN npm install
     
     # Copy source
     COPY . .
