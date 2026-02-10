@@ -7,7 +7,7 @@
     COPY package*.json ./
     
     # Installing libraries
-    RUN npm install
+    RUN npm ci
     
     # Copy source
     COPY . .
