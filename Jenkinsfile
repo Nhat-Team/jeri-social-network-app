@@ -15,17 +15,6 @@ pipeline {
 			}
 		}
 
-		stage('Pull All Images') {
-			steps {
-				bat '''
-					call docker pull node:20-slim
-					call docker pull nginx:alpine
-					call docker pull eclipse-temurin:21-jdk
-					call docker pull eclipse-temurin:21-jre
-				'''
-			}
-		}
-
         stage('Detect Changed Services') {
             steps {
                 script {
