@@ -2,6 +2,10 @@ pipeline {
 	
 	agent any
 
+    environment {
+        DOCKER_BUILDKIT = '1'
+        COMPOSE_DOCKER_CLI_BUILD = '1'
+    }
 
 	stages {
 		
@@ -17,31 +21,38 @@ pipeline {
 					call docker pull node:20-slim
 					call docker pull nginx:alpine
 					call docker pull eclipse-temurin:21-jdk
+					call docker pull eclipse-temurin:21-jre
 				'''
 			}
 		}
 
-		stage('Build Backend Services') {
-			steps {
-				script {
-					def services = ['user-service', 'api-gateway']
+        stage('Detect Changed Services') {
+            steps {
+                script {
+                    def changedFiles = bat(
+                        script: "git diff --name-only HEAD~1",
+                        returnStdout: true
+                    ).trim()
 
-					services.each { service ->
-							dir("backend/${service}") {
-									bat '''
-										call gradlew.bat bootJar
-									'''
-						}	
-					}	
-				}
-			}
-		}
+                    env.BUILD_FRONTEND = changedFiles.contains("frontend/") ? "true" : "false"
+                    env.BUILD_USER = changedFiles.contains("backend/user-service/") ? "true" : "false"
+                    env.BUILD_GATEWAY = changedFiles.contains("backend/api-gateway/") ? "true" : "false"
+                }
+            }
+        }
 
 		stage('Build All Docker Images') {
 			steps {
-				bat '''
-					docker-compose up -d --build
-				'''
+                script {
+                    if (env.BUILD_FRONTEND == "true")
+                        bat 'docker-compose build frontend'
+
+                    if (env.BUILD_USER == "true")
+                        bat 'docker-compose build user-service'
+
+                    if (env.BUILD_GATEWAY == "true")
+                        bat 'docker-compose build api-gateway'
+                }
 			}
 		}
 	}
