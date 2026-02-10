@@ -7,7 +7,7 @@
     COPY package*.json ./
     
     # Installing libraries
-    RUN npm ci --no-audit --no-fund
+    RUN npm ci --include=dev --no-audit --no-fund
     
     # Copy source
     COPY . .
