@@ -33,8 +33,6 @@ yarn-debug.log
 pnpm-debug.log*
 lerna-debug.log*
 yarn-error.log
-package-lock.json
-yarn.lock
 logs
 *.log
 dist
