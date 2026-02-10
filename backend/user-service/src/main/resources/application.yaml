@@ -7,6 +7,8 @@ spring:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:jeri_user_serivce}
     user: ${DB_USER:postgres}
     password: ${DB_PASSWORD:123456789}
+    validate-migration-naming: true
+    validate-on-migrate: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:jeri_user_serivce}
@@ -23,3 +25,8 @@ server:
   port: ${SERVER_PORT:11001}
   servlet:
     context-path: /user
+minio:
+  endpoint: http://${MINIO_HOST:localhost}:${MINIO_PORT:9000}
+  accessKey: ${MINIO_ACCESS_KEY:admin}
+  secretKey: ${MINIO_SECRET_KEY:admin}
+  bucket-name: ${MINIO_BUCKET_NAME:jeri-user-bucket}

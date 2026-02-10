@@ -20,7 +20,6 @@ pipeline {
 							dir("backend/${service}") {
 									bat '''
 										call echo --------- Install Service --------- 
-										call gradlew.bat build -x test
 										call gradlew.bat bootJar
 									'''
 						}	
