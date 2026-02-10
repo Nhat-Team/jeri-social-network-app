@@ -1,8 +1,8 @@
 name: jeri-app-chat
 services:
     keycloak:
-        image: keycloak/keycloak:26.5
         container_name: keycloak
+        image: keycloak/keycloak:26.5
         environment:
             KC_BOOTSTRAP_ADMIN_USERNAME: admin
             KC_BOOTSTRAP_ADMIN_PASSWORD: admin
@@ -14,8 +14,8 @@ services:
             - jeri-app-chat-network
 
     elasticsearch:
+        container_name: elastichsearch
         image: elasticsearch:9.2.4
-        container_name: elasticsearch
         environment:
             - discovery.type=single-node
         ports:
@@ -25,27 +25,26 @@ services:
             - jeri-app-chat-network
 
     minio:
-        image: minio/minio:latest
         container_name: minio
+        image: minio/minio:latest
         environment:
+            MINIO_DEFAULT_BUCKETS: admin
             MINIO_ROOT_USER: admin
             MINIO_ROOT_PASSWORD: 123456789
-            MINIO_DEFAULT_BUCKETS: admin
         command: [ "server", "--console-address", ":9001", "/data" ]
         ports:
             - 9000:9000
             - 9001:9001
         networks:
             - jeri-app-chat-network
-        volumes:
-            - ./storage/minio-volume:/data
     
     postgres:
+        container_name: postgres
         image: postgres:15.1
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: 123456789
-            POSTGRES_DB: ${POSTGRES_DB:-jeri_user_service}
+            POSTGRES_DB: postgres
         ports:
             - 5432:5432
         networks:
@@ -58,8 +57,8 @@ services:
             dockerfile: Dockerfile
         ports:
             - 11000:11000
-        envrionment:
-            - SERVER_PORT: 11000
+        environment:
+            SERVER_PORT: 11000
         restart: always
         networks:
             - jeri-app-chat-network
@@ -72,28 +71,36 @@ services:
         ports:
             - 11001:11001
         environment:
+            SERVER_PORT: 11001
             DB_HOST: postgres
             DB_PORT: 5432
             DB_NAME: jeri_user_service
             DB_USER: postgres
             DB_PASSWORD: 123456789
-            SERVER_PORT: 11001
+            MINIO_HOST: minio
+            MINIO_PORT: 9000
+            MINIO_ACCESS_KEY: admin
+            MINIO_SECRET_KEY: 123456789
+            MINIO_BUCKET_NAME: jeri-user-service
         networks:
             - jeri-app-chat-network
         depends_on:
             - postgres
             - minio
             - keycloak
-            - gateway-service
+            - api-gateway
     
-    # frontend:
-    #     build:
-    #         context: ./frontend/website
-    #         dockerfile: Dockerfile
-    #     ports:
-    #         - "80:80"
-    #     depends_on:
-    #         - user-service
+    frontend:
+        container_name: jeri_website
+        build:
+            context: ./frontend/website
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        depends_on:
+            - api-gateway
+        networks:
+            - jeri-app-chat-network
         
 networks:
     jeri-app-chat-network:
