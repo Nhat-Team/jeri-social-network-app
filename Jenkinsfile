@@ -11,6 +11,16 @@ pipeline {
 			}
 		}
 
+		stage('Pull All Images') {
+			steps {
+				bat '''
+					call docker pull node:20-slim
+					call docker pull nginx:alpine
+					calldocker pull eclipse-temurin:21-jdk
+				'''
+			}
+		}
+
 		stage('Build Backend Services') {
 			steps {
 				script {
@@ -19,7 +29,6 @@ pipeline {
 					services.each { service ->
 							dir("backend/${service}") {
 									bat '''
-										call echo --------- Install Service --------- 
 										call gradlew.bat bootJar
 									'''
 						}	
