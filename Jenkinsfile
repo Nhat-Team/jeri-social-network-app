@@ -16,7 +16,7 @@ pipeline {
 				bat '''
 					call docker pull node:20-slim
 					call docker pull nginx:alpine
-					calldocker pull eclipse-temurin:21-jdk
+					call docker pull eclipse-temurin:21-jdk
 				'''
 			}
 		}
