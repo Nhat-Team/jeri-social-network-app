@@ -16,8 +16,8 @@ pipeline {
 		}
 
         stage('Build All Services') {
-            dir('backend') {
-                steps {
+            steps {
+                dir('backend') {
                     sh '''
                         ./gradlew clean build -x test
                     '''
