@@ -1,14 +1,12 @@
 spring:
   application:
     name: friend-service
-  neo4j:
-    authentication:
-      username: ${NEO4J_USERNAME:friend_user}
-      password: ${NEO4J_PASSWORD:friend_password}
-    uri: bolt://${NEO4J_HOST:localhost}:${NEO4J_PORT:7687}
-  data:
-    neo4j:
-      database: ${NEO4J_DATABASE:friend_db}
+  mongodb:
+    host: ${MONGODB_HOST:localhost}
+    port: ${MONGODB_PORT:27017}
+    username: ${MONGODB_USERNAME:mongodb}
+    password: ${MONGODB_PASSWORD:123456789}
+    database: ${MONGODB_DATABASE:jeri_friend_service}
 server:
   port: ${SERVER_PORT:11004}
   servlet:

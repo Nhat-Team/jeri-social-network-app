@@ -6,23 +6,29 @@ services:
         environment:
             KC_BOOTSTRAP_ADMIN_USERNAME: admin
             KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+            JAVA_OTPS_APPEND: "-Xms256m -Xmx512m"
         ports:
             - 8081:8080
         command:
             - start-dev
         networks:
             - jeri-app-chat-network
+        mem_limit: 512m
+        cpus: 1.0
 
     elasticsearch:
         container_name: elastichsearch
         image: elasticsearch:9.2.4
         environment:
-            - discovery.type=single-node
+            discovery.type: single-node
+            ES_JAVA_OPTS: "-Xms512m -Xmx512m"
         ports:
             - 9200:9200
             - 9300:9300
         networks:
             - jeri-app-chat-network
+        mem_limit: 512m
+        cpus: 1.0
 
     minio:
         container_name: minio
@@ -37,6 +43,9 @@ services:
             - 9001:9001
         networks:
             - jeri-app-chat-network
+        mem_limit: 256m
+        cpus: 0.5
+
     
     postgres:
         container_name: postgres
@@ -49,6 +58,22 @@ services:
             - 5432:5432
         networks:
             - jeri-app-chat-network
+        mem_limit: 512m
+        cpus: 0.5
+
+    mongodb:
+        container_name: mongodb
+        image: mongo:8.2.5-noble
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: mongodb
+            MONGO_INITDB_ROOT_PASSWORD: 123456789
+        ports:
+            - 27017:27017
+        networks:
+            - jeri-app-chat-network
+        mem_limit: 512m
+        cpus: 0.5
+
 
     api-gateway:
         container_name: api-gateway
@@ -59,9 +84,10 @@ services:
             - 11000:11000
         environment:
             SERVER_PORT: 11000
-        restart: always
         networks:
             - jeri-app-chat-network
+        mem_limit: 256m
+        cpus: 1.0
 
     user-service:
         container_name: user-service
@@ -89,7 +115,59 @@ services:
             - minio
             - keycloak
             - api-gateway
-    
+        mem_limit: 512m
+        cpus: 0.5
+
+    friend-service:
+        container_name: friend-service
+        build:
+            context: ./backend/friend-service
+            dockerfile: Dockerfile
+        ports:
+            - 11004:11004
+        environment:
+            MONGODB_HOST: mongodb
+            MONGODB_PORT: 27017
+            MONGODB_USERNAME: mongodb
+            MONGODB_PASSWORD: 123456789
+            MONGODB_DATABASE: jeri_friend_service
+            SERVER_PORT: 11004
+        networks:
+            - jeri-app-chat-network
+        depends_on:
+            - postgres
+            - mongodb
+            - minio
+            - keycloak
+            - api-gateway
+        mem_limit: 512m
+        cpus: 0.5
+
+    chat-service:
+        container_name: chat-service
+        build:
+            context: ./backend/chat-service
+            dockerfile: Dockerfile
+        ports:
+            - 11002:11002
+        environment:
+            MONGODB_HOST: mongodb
+            MONGODB_PORT: 27017
+            MONGODB_USERNAME: mongodb
+            MONGODB_PASSWORD: 123456789
+            MONGODB_DATABASE: jeri_chat_service
+            SERVER_PORT: 11002
+        networks:
+            - jeri-app-chat-network
+        depends_on:
+            - postgres
+            - mongodb
+            - minio
+            - keycloak
+            - api-gateway
+        mem_limit: 512m
+        cpus: 0.5
+
     frontend:
         container_name: jeri_website
         build:
@@ -101,6 +179,8 @@ services:
             - api-gateway
         networks:
             - jeri-app-chat-network
+        mem_limit: 256m
+        cpus: 0.5
         
 networks:
     jeri-app-chat-network:
