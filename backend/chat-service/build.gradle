@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '4.0.2'
     id 'io.spring.dependency-management' version '1.1.7'
-    id 'org.graalvm.buildtools.native' version '0.11.4'
 }
 
 group = 'io.github.nhatteam.project'
@@ -11,7 +10,7 @@ description = 'chat-service'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -23,20 +22,21 @@ configurations {
 
 repositories {
     mavenCentral()
-    mavenLocal()
 }
 
-bootBuildImage {
-    builder = "paketobuildpacks/builder-jammy-buildpackless-tiny"
-    buildpacks = ["paketobuildpacks/oracle", "paketobuildpacks/java-native-image"]
+bootJar {
+    mainClass = "io.github.nhatteam.jeri.service.ChatServiceApplication"
 }
 
 dependencies {
-    implementation 'io.github.nhatteam.project:library-common-core:1.0'
+    implementation project(":library-common-core")
 
+    implementation 'io.minio:minio:8.6.0'
     implementation 'org.mapstruct:mapstruct:1.6.3'
-    implementation 'org.mapstruct:mapstruct-processor:1.6.3'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-cassandra'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -46,7 +46,6 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-data-cassandra-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-websocket-test'

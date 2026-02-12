@@ -1,3 +1,8 @@
-FROM eclipse-temurin:25.0.1_8-jre-ubi10-minimal
+### Run Application ###
+FROM eclipse-temurin:21-jre
 
-CMD ["/gradlew", "bootBuildImage"]
+WORKDIR /app
+
+COPY build/libs/chat-service-1.0.jar chat-service-app.jar
+
+ENTRYPOINT ["java", "-Xms256m", "-Xmx512m", "-jar", "chat-service-app.jar"]
