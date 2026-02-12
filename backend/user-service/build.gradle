@@ -22,7 +22,6 @@ configurations {
 
 repositories {
     mavenCentral()
-    mavenLocal()
 }
 
 bootJar {
@@ -30,7 +29,7 @@ bootJar {
 }
 
 dependencies {
-    implementation files('library/library-common-core-1.0.jar')
+    implementation project(":library-common-core")
 
     implementation 'io.minio:minio:8.6.0'
     implementation 'org.mapstruct:mapstruct:1.6.3'

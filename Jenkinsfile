@@ -15,36 +15,29 @@ pipeline {
 			}
 		}
 
-        // stage('Detect Changed Services') {
-        //     steps {
-        //         script {
-        //             def changedFiles = bat(
-        //                 script: "git diff --name-only HEAD~1",
-        //                 returnStdout: true
-        //             ).trim()
-
-        //             env.BUILD_FRONTEND = changedFiles.contains("frontend/") ? "true" : "false"
-        //             env.BUILD_USER = changedFiles.contains("backend/user-service/") ? "true" : "false"
-        //             env.BUILD_GATEWAY = changedFiles.contains("backend/api-gateway/") ? "true" : "false"
-        //         }
-        //     }
-        // }
+        stage('Build All Services') {
+            steps {
+                sh '''
+                   ./gradlew clean build -x test
+                '''
+            }
+        }
 
 		stage('Build All Docker Images') {
 			steps {
-                // script {
-                //     if (env.BUILD_FRONTEND == "true")
-                //         bat 'docker-compose build frontend'
-
-                //     if (env.BUILD_USER == "true")
-                //         bat 'docker-compose build user-service'
-
-                //     if (env.BUILD_GATEWAY == "true")
-                //         bat 'docker-compose build api-gateway'
-                // }
-				bat 'docker-compose up -d --build'
+                sh '''
+                    docker compose build
+                '''
 			}
 		}
+
+        stage('Deploying Services') {
+            steps {
+                sh '''
+                    docker compose up -d
+                '''
+            }
+        }
 	}
 
 	post {
