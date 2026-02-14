@@ -2,7 +2,7 @@ spring:
   application:
     name: chat-service
   mongodb:
-    host: ${MONGODB_HOST:localhost}
+    host: ${MONGODB_HOST:100.69.244.58}
     port: ${MONGODB_PORT:27017}
     username: ${MONGODB_USERNAME:mongodb}
     password: ${MONGODB_PASSWORD:123456789}
@@ -12,7 +12,7 @@ server:
   servlet:
     context-path: /chat
 minio:
-  endpoint: http://${MINIO_HOST:localhost}:${MINIO_PORT:9000}
+  endpoint: http://${MINIO_HOST:100.69.244.58}:${MINIO_PORT:9000}
   accessKey: ${MINIO_ACCESS_KEY:admin}
-  secretKey: ${MINIO_SECRET_KEY:admin}
+  secretKey: ${MINIO_SECRET_KEY:123456789}
   bucket-name: ${MINIO_BUCKET_NAME:jeri-chat-bucket}

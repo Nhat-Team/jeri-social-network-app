@@ -8,7 +8,8 @@
 rootProject.name = 'backend'
 
 include 'library-common-core'
+include 'api-gateway'
 include 'user-service'
 include 'friend-service'
 include 'chat-service'
-include 'api-gateway'
+include 'feed-service'

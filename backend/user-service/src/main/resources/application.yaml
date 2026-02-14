@@ -4,14 +4,14 @@ spring:
   flyway:
     enabled: true
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:jeri_user_serivce}
+    url: jdbc:postgresql://${DB_HOST:100.69.244.58}:${DB_PORT:5432}/${DB_NAME:jeri_user_service}
     user: ${DB_USER:postgres}
     password: ${DB_PASSWORD:123456789}
     validate-migration-naming: true
     validate-on-migrate: true
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:jeri_user_serivce}
+    url: jdbc:postgresql://${DB_HOST:100.69.244.58}:${DB_PORT:5432}/${DB_NAME:jeri_user_service}
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:123456789}
   jpa:
@@ -26,7 +26,7 @@ server:
   servlet:
     context-path: /user
 minio:
-  endpoint: http://${MINIO_HOST:localhost}:${MINIO_PORT:9000}
+  endpoint: http://${MINIO_HOST:100.69.244.58}:${MINIO_PORT:9000}
   accessKey: ${MINIO_ACCESS_KEY:admin}
-  secretKey: ${MINIO_SECRET_KEY:admin}
+  secretKey: ${MINIO_SECRET_KEY:123456789}
   bucket-name: ${MINIO_BUCKET_NAME:jeri-user-bucket}

@@ -12,6 +12,9 @@ public class RouterConfig {
     public RouteLocator routeConfig(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("user-service",p -> p.path("/user/**").uri("lb://user-service/user"))
+                .route("friend-service",p -> p.path("/friend/**").uri("lb://friend-service/friend"))
+                .route("chat-service",p -> p.path("/chat/**").uri("lb://chat-service/chat"))
+                .route("feed-service",p -> p.path("/feed/**").uri("lb://feed-service/feed"))
                 .build();
     }
 }
