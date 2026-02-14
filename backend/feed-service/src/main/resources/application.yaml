@@ -2,17 +2,17 @@ spring:
   application:
     name: feed-service
   mongodb:
-    username: ${MONGODB_USERNAME:feed_user}
-    password: ${MONGODB_PASSWORD:feed_password}
-    host: ${MONGODB_HOST:localhost}
+    username: ${MONGODB_USERNAME:mongodb}
+    password: ${MONGODB_PASSWORD:123456789}
+    host: ${MONGODB_HOST:100.69.244.58}
     port: ${MONGODB_PORT:27017}
-    database: ${MONGODB_DATABASE:feed_db}
+    database: ${MONGODB_DATABASE:jeri_feed_service}
 server:
   port: ${SERVER_PORT:11003}
   servlet:
     context-path: /feed
 minio:
-  endpoint: http://${MINIO_HOST:localhost}:${MINIO_PORT:9000}
+  endpoint: http://${MINIO_HOST:100.69.244.58}:${MINIO_PORT:9000}
   accessKey: ${MINIO_ACCESS_KEY:admin}
-  secretKey: ${MINIO_SECRET_KEY:admin}
+  secretKey: ${MINIO_SECRET_KEY:123456789}
   bucket-name: ${MINIO_BUCKET_NAME:jeri-feed-bucket}
