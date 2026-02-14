@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableLibraryCore
 public class FriendServiceApplication {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(FriendServiceApplication.class, args);
     }
 

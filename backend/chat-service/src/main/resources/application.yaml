@@ -11,3 +11,8 @@ server:
   port: ${SERVER_PORT:11002}
   servlet:
     context-path: /chat
+minio:
+  endpoint: http://${MINIO_HOST:localhost}:${MINIO_PORT:9000}
+  accessKey: ${MINIO_ACCESS_KEY:admin}
+  secretKey: ${MINIO_SECRET_KEY:admin}
+  bucket-name: ${MINIO_BUCKET_NAME:jeri-chat-bucket}
