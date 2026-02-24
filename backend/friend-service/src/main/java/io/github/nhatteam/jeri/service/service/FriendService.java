@@ -41,7 +41,7 @@ public class FriendService {
     }
 
     public List<FriendVo> getAllFriends(Long userId) {
-        return friendRepository.findFriendByUser().stream().map(this::getVo).toList();
+        return friendRepository.getFriendsFromUser(userId).stream().map(this::getVo).toList();
     }
 
     private FriendVo getVo(Friend friend) {

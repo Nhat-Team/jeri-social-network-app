@@ -17,7 +17,7 @@ import java.time.Instant;
 
 @MappedSuperclass
 @Data
-@FieldDefaults(level = AccessLevel.PROTECTED)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @DynamicInsert @DynamicUpdate
@@ -25,6 +25,12 @@ public abstract class BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id", nullable = false)
     Long id;
+
+    @Column(name = "note")
+    String note;
+
+    @Column(name = "deleted", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    Boolean deleted;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -42,6 +48,10 @@ public abstract class BaseEntity {
     @Column(name = "last_modified_by", length = 50, nullable = false)
     String lastModifiedBy;
 
-    @Column(name = "status", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
-    Boolean deleted;
+    @Version @Column(name = "version", nullable = false, columnDefinition = "BIGINT DEFAULT 0")
+    Long version;
+
+    public BaseEntity(String note) {
+        this.note = note;
+    }
 }
