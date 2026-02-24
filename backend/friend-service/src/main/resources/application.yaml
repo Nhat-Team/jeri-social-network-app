@@ -27,6 +27,7 @@ spring:
     username: ${MONGODB_USERNAME:mongodb}
     password: ${MONGODB_PASSWORD:123456789}
     database: ${MONGODB_DATABASE:jeri_friend_service}
+    authentication-database: ${MONGODB_AUTHENTICATION_DATABASE:admin}
 server:
   port: ${SERVER_PORT:11004}
   servlet:

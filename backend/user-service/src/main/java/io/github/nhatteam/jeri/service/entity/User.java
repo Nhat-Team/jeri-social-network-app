@@ -43,4 +43,16 @@ public class User extends BaseEntity {
 
     @OneToOne(mappedBy = "user")
     Address address;
+
+    public User(String note, @NonNull String firstName, @NonNull String lastName, @NonNull LocalDate birthDate, @NonNull String phone, @NonNull String email, @NonNull String username, String avatar, Address address) {
+        super(note);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.phone = phone;
+        this.email = email;
+        this.username = username;
+        this.avatar = avatar;
+        this.address = address;
+    }
 }
