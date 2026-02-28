@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
-import searchReducer from "./slices/searchSlice";
+import colorSchemeReducer from "./slices/colorSchemeSlice";
+import languageReducer from "./slices/languageSlice";
 
 export const store = configureStore({
     reducer: {
-        search: searchReducer,
+        colorScheme: colorSchemeReducer,
+        language: languageReducer,
     }
 });
 
