@@ -1,0 +1,20 @@
+{
+    "header": {
+        "input_search": {
+            "placeholder": "Search"
+        }
+    },
+    "contact": {
+        "tab_menu": {
+            "friends": "Friends",
+            "groups": "Groups"
+        },
+        "sub_tab_menu": {
+            "all": "All",
+            "request": "Request"
+        }
+    },
+    "profile": {
+        
+    }
+}

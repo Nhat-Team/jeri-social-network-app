@@ -1,9 +1,15 @@
-import {SafeAreaView, Text} from "react-native";
+import CustomSafeAreaView from "@/components/styles/CustomSafeAreaView";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export default function TabProfile() {
+
+    const language = useLanguage();
+
     return (
-        <SafeAreaView>
-            <Text>Profile</Text>
-        </SafeAreaView>
+        <CustomSafeAreaView backgroundPriority="secondary" styles={{
+
+        }}>
+
+        </CustomSafeAreaView>
     )
 }
