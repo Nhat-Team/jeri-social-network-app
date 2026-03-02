@@ -87,7 +87,7 @@ export default function HeaderComponent() {
             },
           }}
         >
-          <FontAwesome5 name="search" size={24} color="white" />
+          <FontAwesome5 name="search" size={30} color="white" />
           <CustomText content={language.header.input_search.placeholder} styles={{
             marginLeft: 10,
             color: "white"

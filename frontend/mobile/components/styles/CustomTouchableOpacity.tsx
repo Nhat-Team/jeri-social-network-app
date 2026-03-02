@@ -4,11 +4,13 @@ import { TouchableOpacity } from "react-native";
 
 export default function CustomTouchableOpacity({
   backgroundPriority = "primary",
+  borderAllow = true,
   children,
   styles,
   props,
 }: {
   backgroundPriority?: "primary" | "secondary";
+  borderAllow?: boolean;
   children?: React.ReactNode;
   styles?: object;
   props?: object;
@@ -20,9 +22,9 @@ export default function CustomTouchableOpacity({
         backgroundColor: backgroundPriority === "primary" ? theme.colors.backgroundPrimary : theme.colors.backgroundSecondary,
         padding: theme.spacing.s,
         color: theme.colors.textColor,
-        borderRadius: theme.borderRadius.m,
-        borderColor: theme.colors.borderColor,
-        borderWidth: 1,
+        borderRadius: borderAllow ? theme.borderRadius.m : 0,
+        borderColor: borderAllow ? theme.colors.borderColor : "transparent",
+        borderWidth: borderAllow ? 1 : 0,
     }, styles]} {...props}>
       {children}
     </TouchableOpacity>

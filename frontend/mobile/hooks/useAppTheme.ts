@@ -4,5 +4,5 @@ import { useSelector } from "react-redux";
 
 export const useAppTheme = () => {
     const scheme = useSelector((state: RootState) => state.colorScheme);
-    return scheme === 'dark' ? DarkTheme : LightTheme;
+    return scheme === 'light' ? DarkTheme : LightTheme;
 }
