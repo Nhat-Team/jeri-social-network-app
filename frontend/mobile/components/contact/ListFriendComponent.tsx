@@ -1,13 +1,13 @@
-import dataFriend from "@/data/friend/list_friend.json";
+import dataFriend from "@/data/contact/list_friend.json";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useEffect, useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import CustomAvatar from "../styles/CustomAvatar";
+import CustomIcon from "../styles/CustomIcon";
 import CustomSafeAreaView from "../styles/CustomSafeAreaView";
 import CustomText from "../styles/CustomText";
 import CustomTouchableOpacity from "../styles/CustomTouchableOpacity";
-import CustomIcon from "../styles/CustomIcon";
 
 export default function ListFriendComponent({
   subTabMenuSelected,
@@ -78,7 +78,9 @@ export default function ListFriendComponent({
                   }}
                 >
                   <Pressable>
-                    <CustomIcon icon={<Ionicons name="call-outline" size={30} />}/>
+                    <CustomIcon
+                      icon={<Ionicons name="call-outline" size={30} />}
+                    />
                   </Pressable>
 
                   <Pressable
@@ -87,7 +89,9 @@ export default function ListFriendComponent({
                       marginRight: 10,
                     }}
                   >
-                    <CustomIcon icon={<Feather name="video" size={30} color="black" />} />
+                    <CustomIcon
+                      icon={<Feather name="video" size={30} color="black" />}
+                    />
                   </Pressable>
                 </View>
               </CustomTouchableOpacity>

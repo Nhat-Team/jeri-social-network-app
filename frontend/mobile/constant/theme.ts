@@ -19,7 +19,7 @@ const Palette = {
     // Neutral Colors (Dark)
     darkBg: '#0F1014',       // Đen nhám sâu
     darkSurface: '#242830',  // Xám đen (Card nền tối)
-    darkSpacer: '#292929',    // Màu nền chính (giống Twitter Dark)
+    darkSpacer: '#0F1014',    // Màu nền chính (giống Twitter Dark)
     darkText: '#F8F9FA',
     darkSubtext: '#ADB5BD',
     darkBorder: '#2C2E33',
@@ -37,7 +37,8 @@ const SharedTheme = {
     },
     typography: {
         h1: { fontSize: 30, fontWeight: '800' as const },
-        body: { fontSize: 16, fontWeight: '400' as const },
+        body: { fontSize: 20, fontWeight: '400' as const },
+        subtitle: { fontSize: 16, fontWeight: '600' as const },
         button: { fontSize: 16, fontWeight: '600' as const },
     },
 };

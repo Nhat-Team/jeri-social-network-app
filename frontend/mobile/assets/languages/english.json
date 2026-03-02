@@ -15,6 +15,26 @@
         }
     },
     "profile": {
-        
+        "view_profile_subtitle": "View your profile",
+        "my_document": {
+            "tab_name": "My Document",
+            "subtitle": "Storing your important texts and files on your cloud"
+        },
+        "account_and_security": {
+            "tab_name": "Account and security",
+            "account": {
+                "label": "Account",
+                "personal_information": "Personal information",
+                "phone_number_label": "Phone number",
+                "email_label": "Email"
+            },
+            "security": {
+                "label": "Security",
+                "change_password": "Change password",
+                "change_password_subtitle": "Change your password to keep your account secure",
+                "two_factor_authentication": "Two-factor authentication",
+                "delete_account": "Delete account"
+            }
+        }
     }
 }

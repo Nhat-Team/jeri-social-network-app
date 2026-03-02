@@ -21,6 +21,7 @@ export default function CustomSafeAreaView({
           backgroundColor: backgroundPriority === "secondary" ? theme.colors.backgroundSecondary : theme.colors.backgroundPrimary,
           padding: theme.spacing.m,
           pointerEvents: "auto",
+          height: "100%",
         },
         styles,
       ]}
