@@ -7,6 +7,27 @@ spring:
     username: ${MONGODB_USERNAME:mongodb}
     password: ${MONGODB_PASSWORD:123456789}
     database: ${MONGODB_DATABASE:jeri_chat_service}
+    authentication-database: ${MONGODB_AUTHENTICATION_DATABASE:admin}
+  flyway:
+    enabled: true
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:100.69.244.58}:${DB_PORT:5432}/${DB_NAME:jeri_chat_service}
+    user: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:123456789}
+    validate-migration-naming: true
+    validate-on-migrate: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:100.69.244.58}:${DB_PORT:5432}/${DB_NAME:jeri_chat_service}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:123456789}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
 server:
   port: ${SERVER_PORT:11002}
   servlet:

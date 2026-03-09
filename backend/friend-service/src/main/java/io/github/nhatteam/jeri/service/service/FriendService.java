@@ -1,11 +1,11 @@
 package io.github.nhatteam.jeri.service.service;
 
-import io.github.nhatteam.jeri.service.entity.mongodb.Friend;
+import io.github.nhatteam.jeri.service.entity.nosql.Friend;
 import io.github.nhatteam.jeri.service.enums.FriendStatus;
 import io.github.nhatteam.jeri.service.mapper.FriendMapper;
 import io.github.nhatteam.jeri.service.model.dto.FriendDto;
 import io.github.nhatteam.jeri.service.model.vo.FriendVo;
-import io.github.nhatteam.jeri.service.repository.mongodb.FriendRepository;
+import io.github.nhatteam.jeri.service.repository.nosql.FriendRepository;
 import io.github.nhatteam.project.core.exception.QueryNotFoundException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,27 @@
 spring:
   application:
     name: api-gateway
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          realm: ${KEYCLOAK_REALM:jeri-app-chat-realm}
+          admin-username: ${KEYCLOAK_ADMIN_USERNAME:admin}
+          admin-password: ${KEYCLOAK_ADMIN_PASSWORD:123456789}
+          default-path: http://${KEYCLOAK_HOST:100.69.244.58}:${KEYCLOAK_PORT:8081}
+          issuer-uri: ${spring.security.oauth2.resourceserver.jwt.default-path}/realms/jeri-app-chat-realm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 server:
   port: ${SERVER_PORT:11000}
   address: 0.0.0.0
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:11050}/eureka/
+    registry-fetch-interval-seconds: 5
+  instance:
+    prefer-ip-address: true
