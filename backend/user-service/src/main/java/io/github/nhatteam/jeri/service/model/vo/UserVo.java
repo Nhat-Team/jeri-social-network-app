@@ -16,6 +16,8 @@ public class UserVo extends BaseVo {
 
     Long id;
 
+    String userId;
+
     String firstName;
 
     String lastName;

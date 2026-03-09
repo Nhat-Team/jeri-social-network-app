@@ -8,6 +8,7 @@
 rootProject.name = 'backend'
 
 include 'library-common-core'
+include 'eureka-server'
 include 'api-gateway'
 include 'user-service'
 include 'friend-service'

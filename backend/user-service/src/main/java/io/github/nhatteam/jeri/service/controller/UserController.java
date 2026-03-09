@@ -21,27 +21,26 @@ public class UserController implements IController<UserDto, Long> {
 
     UserService userService;
 
-    @PostMapping("/")
     @Override
-    public ResponseEntity<UserVo> add(@Valid @RequestBody UserDto request) {
-        return ResponseEntity.ok(userService.add(request));
+    public ResponseEntity<UserVo> add(@Valid @RequestBody UserDto request) throws Exception {
+        return null;
     }
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<UserVo> update(@PathVariable @Positive(message = "must be a number greater than 0") @Valid Long id, @Valid @RequestBody UserDto request) {
+    public ResponseEntity<UserVo> update(@PathVariable @Positive(message = "must be a number greater than 0") @Valid Long id, @Valid @RequestBody UserDto request) throws Exception {
         return ResponseEntity.ok(userService.update(id, request));
     }
 
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<UserVo> delete(Long id) {
+    public ResponseEntity<UserVo> delete(@PathVariable Long id) {
         return ResponseEntity.ok(userService.delete(id));
     }
 
     @GetMapping("/{id}")
     @Override
-    public ResponseEntity<UserVo> getById(Long id) {
+    public ResponseEntity<UserVo> getById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getById(id));
     }
 

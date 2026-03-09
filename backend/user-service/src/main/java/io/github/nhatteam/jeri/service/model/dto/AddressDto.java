@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Size;
 
 public record AddressDto(
 
+        Long userId,
+
         @Size(max = 50, message = "maximum length is {max} characters")
         String street,
 

@@ -1,6 +1,7 @@
 package io.github.nhatteam.jeri.service.service;
 
 import io.github.nhatteam.jeri.service.entity.Address;
+import io.github.nhatteam.jeri.service.entity.User;
 import io.github.nhatteam.jeri.service.mapper.AddressMapper;
 import io.github.nhatteam.jeri.service.model.dto.AddressDto;
 import io.github.nhatteam.jeri.service.model.vo.AddressVo;
@@ -29,8 +30,20 @@ public class AddressService implements IService<AddressDto, Long> {
     @Override
     @Transactional(rollbackOn = Exception.class)
     public AddressVo add(AddressDto request) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    public AddressVo add(Long userId, AddressDto request) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new QueryNotFoundException("User not found"));
         Address address = addressMapper.toEntity(request);
-        return addressMapper.toVo(addressRepository.save(address));
+        address.setUser(user);
+        Address result = addressRepository.save(address);
+
+        user.setAddress(result);
+        userRepository.save(user);
+
+        return addressMapper.toVo(result);
     }
 
     @Override
