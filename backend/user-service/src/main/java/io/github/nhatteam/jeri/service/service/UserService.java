@@ -1,8 +1,10 @@
 package io.github.nhatteam.jeri.service.service;
 
+import io.github.nhatteam.jeri.service.entity.Address;
 import io.github.nhatteam.jeri.service.entity.User;
 import io.github.nhatteam.jeri.service.mapper.AddressMapper;
 import io.github.nhatteam.jeri.service.mapper.UserMapper;
+import io.github.nhatteam.jeri.service.model.dto.AccountResetPasswordDto;
 import io.github.nhatteam.jeri.service.model.dto.UserDto;
 import io.github.nhatteam.jeri.service.model.vo.UserVo;
 import io.github.nhatteam.jeri.service.repository.AddressRepository;
@@ -11,6 +13,7 @@ import io.github.nhatteam.jeri.service.service.external.KeyCloakService;
 import io.github.nhatteam.project.core.exception.QueryNotFoundException;
 import io.github.nhatteam.project.core.service.IService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -35,7 +38,7 @@ public class UserService implements IService<UserDto, Long> {
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public UserVo add(UserDto request) throws Exception {
+    public UserVo add(@Valid UserDto request) throws Exception {
         if(userRepository.findByEmail(request.email()).isPresent()) {
             throw new BadRequestException("Email already exists");
         } else if(userRepository.findByUsername(request.username()).isPresent()) {
@@ -44,20 +47,23 @@ public class UserService implements IService<UserDto, Long> {
             throw new BadRequestException("Phone number already exists");
         }
 
+        keyCloakService.createUser(request);
+
         User user = userMapper.toEntity(request);
-        user.setUserId(generateUserId());
+        user.setUserId(keyCloakService.getUserId(user.getUsername()));
         user.setAddress(null);
         User result = userRepository.save(user);
 
         if(request.address() != null) {
             addressService.add(result.getId(), request.address());
         }
-        return getEntityVo(result);
+
+        return getEntityVo(userRepository.save(result));
     }
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public UserVo update(Long id, UserDto request) throws Exception {
+    public UserVo update(Long id, @Valid UserDto request) throws Exception {
         User user = userRepository.findById(id).orElseThrow(() -> new QueryNotFoundException("User not found"));
 
         if(userRepository.findByEmail(request.email()).orElse(new User()).equals(user)) {
@@ -68,10 +74,17 @@ public class UserService implements IService<UserDto, Long> {
             throw new BadRequestException("Phone number already exists");
         }
 
-        keyCloakService.updateUser("", request);
-
         BeanUtils.copyProperties(request, user);
-        return getEntityVo(userRepository.save(user));
+        if(request.address() != null) {
+            Address address = addressRepository.findById(user.getAddress().getId()).orElse(new Address());
+            BeanUtils.copyProperties(address, request.address());
+            addressRepository.save(address);
+        }
+
+        User result = userRepository.save(user);
+        keyCloakService.updateUser(result);
+
+        return getEntityVo(result);
     }
 
     @Override
@@ -93,13 +106,13 @@ public class UserService implements IService<UserDto, Long> {
         return userRepository.findAll().stream().map(this::getEntityVo).toList();
     }
 
-    private String generateUserId() {
-        return UUID.randomUUID().toString();
-    }
-
     private UserVo getEntityVo(User user) {
         UserVo userVo = userMapper.toVo(user);
         userVo.setAddress(addressMapper.toVo(addressRepository.findById(user.getId()).orElse(null)));
         return userVo;
+    }
+
+    public boolean resetPassword(@Valid AccountResetPasswordDto request) {
+        return keyCloakService.resetPassword(request);
     }
 }

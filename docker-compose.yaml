@@ -74,6 +74,15 @@ services:
         mem_limit: 512m
         cpus: 0.5
 
+    redis:
+        container_name: redis
+        image: redis:8.6.1
+        ports:  
+            - "6379:6379"
+        networks:
+            - jeri-app-chat-network
+        mem_limit: 512m
+        cpus: 0.5
 
     api-gateway:
         container_name: api-gateway

@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: notification-service
+  data:
+    redis:
+      host: ${REDIS_HOST:100.69.244.58}
+      port: 6379
+      username: ${REDIS_USERNAME:admin}
+      password: ${REDIS_PASSWORD:123456789}
+server:
+  port: ${SERVER_PORT:11006}

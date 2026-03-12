@@ -1,5 +1,6 @@
 package io.github.nhatteam.jeri.service.config;
 
+import io.github.nhatteam.project.core.security.SecurityAuditUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
@@ -14,7 +15,7 @@ public class MongoConfig {
         return new AuditorAware<String>() {
             @Override
             public java.util.Optional<String> getCurrentAuditor() {
-                return java.util.Optional.empty();
+                return SecurityAuditUtils.getCurrentAuditor();
             }
         };
     }
