@@ -1,5 +1,6 @@
 package io.github.nhatteam.jeri.service.controller;
 
+import io.github.nhatteam.jeri.service.model.dto.AccountResetPasswordDto;
 import io.github.nhatteam.jeri.service.model.dto.UserDto;
 import io.github.nhatteam.jeri.service.model.vo.UserVo;
 import io.github.nhatteam.jeri.service.service.UserService;
@@ -22,13 +23,14 @@ public class UserController implements IController<UserDto, Long> {
     UserService userService;
 
     @Override
-    public ResponseEntity<UserVo> add(@Valid @RequestBody UserDto request) throws Exception {
-        return null;
+    @PostMapping("/register")
+    public ResponseEntity<UserVo> add(@RequestBody UserDto request) throws Exception {
+        return ResponseEntity.ok(userService.add(request));
     }
 
     @PutMapping("/{id}")
     @Override
-    public ResponseEntity<UserVo> update(@PathVariable @Positive(message = "must be a number greater than 0") @Valid Long id, @Valid @RequestBody UserDto request) throws Exception {
+    public ResponseEntity<UserVo> update(@PathVariable Long id, @RequestBody UserDto request) throws Exception {
         return ResponseEntity.ok(userService.update(id, request));
     }
 
@@ -48,5 +50,10 @@ public class UserController implements IController<UserDto, Long> {
     @Override
     public ResponseEntity<List<UserVo>> getAll() {
         return ResponseEntity.ok(userService.getAll());
+    }
+
+    @PutMapping("/reset-password")
+    public ResponseEntity<Boolean> resetPassword(@Valid @RequestBody AccountResetPasswordDto request) {
+        return ResponseEntity.ok(userService.resetPassword(request));
     }
 }

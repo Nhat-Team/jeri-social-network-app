@@ -1,6 +1,6 @@
 spring:
   application:
-    name: friend-service
+    name: contact-service
   flyway:
     enabled: true
     driver-class-name: org.postgresql.Driver
@@ -31,7 +31,7 @@ spring:
 server:
   port: ${SERVER_PORT:11004}
   servlet:
-    context-path: /friend
+    context-path: /contact
 minio:
   endpoint: http://${MINIO_HOST:100.69.244.58}:${MINIO_PORT:9000}
   accessKey: ${MINIO_ACCESS_KEY:admin}

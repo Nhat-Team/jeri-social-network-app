@@ -1,15 +1,15 @@
 package io.github.nhatteam.jeri.service;
 
-import io.github.nhatteam.project.core.annotation.EnableLibraryCore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-@EnableLibraryCore
-public class FriendServiceApplication {
+@EnableDiscoveryClient
+public class NotificationServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FriendServiceApplication.class, args);
+        SpringApplication.run(NotificationServiceApplication.class, args);
     }
 
 }

@@ -1,6 +1,7 @@
 package io.github.nhatteam.project.core.controller;
 
 import io.github.nhatteam.project.core.model.vo.BaseVo;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 

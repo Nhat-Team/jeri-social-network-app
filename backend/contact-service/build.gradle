@@ -9,7 +9,7 @@ ext {
 
 group = 'io.github.nhatteam.project'
 version = '1.0'
-description = 'friend-service'
+description = 'contact-service'
 
 java {
     toolchain {
@@ -28,7 +28,7 @@ repositories {
 }
 
 bootJar {
-    mainClass = "io.github.nhatteam.jeri.service.FriendServiceApplication"
+    mainClass = "io.github.nhatteam.jeri.service.ContactServiceApplication"
 }
 
 dependencies {
@@ -47,7 +47,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-    implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.flywaydb:flyway-database-postgresql'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -55,7 +54,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-websocket-test'
     runtimeOnly 'org.postgresql:postgresql'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
