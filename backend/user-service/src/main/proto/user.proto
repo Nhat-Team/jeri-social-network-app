@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.github.nhatteam.jeri.service";
+option java_outer_classname = "UserProto";
+
+service UserServiceProto {
+  rpc GetUserInformation(IdProtoRequest) returns (UserServiceProtoResponse) {}
+}
+
+message IdProtoRequest {
+  int64 id = 1;
+}
+
+message UserServiceProtoResponse {
+  int64 id = 1;
+  string userId = 2;
+  string firstName = 3;
+  string lastName = 4;
+  string phone = 5;
+  string email = 6;
+  string username = 7;
+  string avatar = 8;
+  string avatarUrl = 9;
+}

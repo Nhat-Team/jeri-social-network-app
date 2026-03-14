@@ -29,8 +29,10 @@ spring:
           admin-username: ${KEYCLOAK_ADMIN_USERNAME:jeri-user-admin}
           admin-password: ${KEYCLOAK_ADMIN_PASSWORD:123456789}
           default-path: http://${KEYCLOAK_HOST:100.69.244.58}:${KEYCLOAK_PORT:8081}
-          issuer-uri: ${spring.security.oauth2.resourceserver.jwt.default-path}/realms/jeri-app-chat-realm
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+  grpc:
+    server:
+      enabled: true
+      port: ${GRPC_PORT:11100}
 server:
   port: ${SERVER_PORT:11001}
   servlet:

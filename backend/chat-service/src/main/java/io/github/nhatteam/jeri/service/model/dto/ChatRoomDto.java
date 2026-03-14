@@ -14,5 +14,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 public abstract class ChatRoomDto {
 
+    Long senderId;
 
+    String content;
 }

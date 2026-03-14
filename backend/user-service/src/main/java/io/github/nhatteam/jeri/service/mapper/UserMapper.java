@@ -1,5 +1,6 @@
 package io.github.nhatteam.jeri.service.mapper;
 
+import io.github.nhatteam.jeri.service.UserServiceProtoResponse;
 import io.github.nhatteam.jeri.service.entity.User;
 import io.github.nhatteam.jeri.service.model.dto.UserDto;
 import io.github.nhatteam.jeri.service.model.vo.UserVo;
