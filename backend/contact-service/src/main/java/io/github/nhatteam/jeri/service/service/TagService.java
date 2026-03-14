@@ -1,10 +1,10 @@
 package io.github.nhatteam.jeri.service.service;
 
-import io.github.nhatteam.jeri.service.entity.sql.Tag;
+import io.github.nhatteam.jeri.service.entity.Tag;
 import io.github.nhatteam.jeri.service.mapper.TagMapper;
 import io.github.nhatteam.jeri.service.model.dto.TagDto;
 import io.github.nhatteam.jeri.service.model.vo.TagVo;
-import io.github.nhatteam.jeri.service.repository.sql.TagRepository;
+import io.github.nhatteam.jeri.service.repository.TagRepository;
 import io.github.nhatteam.project.core.exception.QueryNotFoundException;
 import io.github.nhatteam.project.core.service.IService;
 import jakarta.transaction.Transactional;

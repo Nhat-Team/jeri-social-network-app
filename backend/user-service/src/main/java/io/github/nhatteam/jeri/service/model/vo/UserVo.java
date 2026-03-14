@@ -32,5 +32,9 @@ public class UserVo extends BaseVo {
 
     String username;
 
+    String avatar;
+
+    String avatarUrl;
+
     Boolean deleted;
 }
